@@ -186,11 +186,13 @@ func (m model) View() string {
 
 	cakeStyle := lipgloss.NewStyle().Width(boxWidth).Align(lipgloss.Center)
 	techStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FFFF")).Italic(true)
+	
 	loadingStyle := lipgloss.NewStyle().
         Foreground(lipgloss.Color("#78e5a9")).
         Bold(true).
         Width(boxWidth). 
         Align(lipgloss.Center)
+	
 	
 	switch m.state {
 	case "loading":
@@ -206,7 +208,8 @@ func (m model) View() string {
 	case "about":
 		headerText = "About"
 		menuText = "(esc) Back"
-		bodyContent = "Oscar joined Layer 10 with excellent references from Ericsson...\n\nHe has shown remarkable potential for rapid growth."
+		bodyContent =  "Oscar joined Layer 10 with excellent references from Ericsson AB/Microwave, where he, over the course of nearly a year, was solely responsible for the modernization and redevelopment of a new, centralized system for test management and execution.  His time at Ericsson, which unfortunately came to an end due to downsizing in 2024, was preceded by studies in web development and security. During his studies, Oscar stood out as one of the few students who, despite limited prior experience, made significant progress particularly within the frontend domain. His genuine passion for programming, combined with experience from other industries such as service and sales, likely contributed to his steep learning curve. Oscar also has experience running his own business.  In summary: Oscar is a web developer with a strong focus on modern frontend technologies. While his CV may not yet reflect many years in the field, he has shown remarkable potential for rapid growth toward a more senior role."
+
 	case "skills":
 		headerText = "Skills"
 		menuText = "(esc) Back"
