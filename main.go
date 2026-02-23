@@ -104,6 +104,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.state = "employer_select"
 		case "s":
 			m.state = "skills"
+		case "l": 
+			m.state = "cakeIsALie"
 		case "up":
 			if m.state == "employer_select" && m.selectedEmployerIdx > 0 {
 				m.selectedEmployerIdx--
@@ -198,6 +200,9 @@ func (m model) View() string {
 		headerText = "Oscar Wendt"
 		menuText = "(a) About   (p) Projects   (s) Skills   (q) Quit"
 		bodyContent = cakeStyle.Render(cakeArt)
+	case "cakeIsALie": 
+		headerText = "The Cake is a lie"
+		bodyContent = cakeStyle.Render(easterEgg)
 	case "about":
 		headerText = "About"
 		menuText = "(esc) Back"
@@ -239,10 +244,6 @@ func (m model) View() string {
 			techLabel, 
 			strings.Join(p.Technologies, ", "))
 	}
-
-	
-
-
 	
 	centeredBody := contentStyle.Width(boxWidth).Render(bodyContent) 
 	

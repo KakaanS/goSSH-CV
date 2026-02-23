@@ -20,7 +20,7 @@
         {
           "slug": "swedpee",
           "name": "SwedPee AB",
-          "period": "2025-09",
+          "period": "2025-09 - ongoing",
           "description": "I’ve taken over a React Native application called Manicken that manages a research study on urinary symptoms. It started as a short initial assignment focused on integrating push notifications and reminders from “Min Forskning,” which is an existing Layer 10 partnership centered around digital consent. The work applies to both the Google Play Store and the iOS App Store versions of the app. This is an Expo-based React Native project with a Google Cloud Functions and Firebase backend, which I’ve also worked with to implement and support this functionality.",
           "technologies": [
             "React Native",
@@ -48,7 +48,7 @@
         {
           "slug": "gridit",
           "name": "Gridit AB",
-          "period": "2025-02",
+          "period": "2025-02 - ongoing",
           "description": "Gridit is developing a system for power grid balancing. I have developed an Expo (React Native) app that displays electricity production from solar panel installations. Based on backend documentation, I implemented flows for login/logout, token management, and data retrieval by day, month and year. Within the app you can follow the production, forecast and the part of market a specific device is planned to partake of. Data handling is built with @tanstack/react-query for efficient caching, and authentication is managed using React Context. For data visualization, VictoryChart is used. All code is written in TypeScript with typed models and custom data structures tailored for the frontend. I have also supported my colleagues at Gridit by creating a service that keeps another service alive, restarts it and can update it. Using technologies such as nssm, ps1 (pwrshell script) and nsi (for easy installation).",
           "technologies": [
             "Vite",
