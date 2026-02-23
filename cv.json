@@ -1,51 +1,137 @@
 {
-  "projects": [
-    {
-      "name": "Nox",
-      "description": "Feasibility study for a therapeutic platform focusing on Tor-based anonymity.",
-      "technologies": ["Tor", "onionSpray", "onionBalancer"]
-    },
-    {
-      "name": "Swedpee AB (Manicken)",
-      "description": "React Native app for research on prostate issues, integrating push notifications.",
-      "technologies": ["React Native", "Firebase", "Expo", "TypeScript"]
-    },
-    {
-      "name": "Gridit AB",
-      "description": "Expo app for visualizing solar and wind power production data.",
-      "technologies": [
-        "React Native",
-        "TanStack Query",
-        "VictoryChart",
-        "TypeScript"
-      ]
-    },
-    {
-      "name": "Ericsson NIV Tool",
-      "description": "Lead developer for a centralized system for executing and managing network tests.",
-      "technologies": ["Next.js", "Node.js", "TypeScript", "SQL"]
-    }
-  ],
   "employers": [
     {
       "name": "Layer Ten Collective AB",
-      "role": "Software Developer",
-      "period": "2024-10 - Present"
+      "location": "Göteborg",
+      "projects": [
+        {
+          "slug": "nox",
+          "name": "Nox - Prestudy",
+          "period": "2025-12 - 2026-01",
+          "description": "As part of a cross-functional engineering team, I participated in a pre-study aimed at evaluating how a therapeutic platform could be designed to allow users to choose between identified and anonymous usage, without compromising functionality, user experience, or professional standards. The work focused on architectural and security challenges related to anonymous access over Tor, including constraints in client environments where JavaScript may be partially or fully disabled. I participated in workshops and took responsibility for evaluating strategies to expose the platform on the Tor network via .onion addresses.\n\n· Conducted a technical pre-study of Tor integration strategies for web applications, comparing proxy-based exposure (onionSpray) with Tor-native onion services coordinated by onionBalancer.\n· Designed Tor-native service architectures with a focus on anonymity, availability, and operational trade-offs, including key management, service identity, and redundancy.\n· Authored internal RFC documents describing scope, threat models, security considerations, and architectural decisions for Tor-based deployments.\n· Analyzed anonymity guarantees, traffic correlation risks, logging practices, and user trust implications for Tor-accessible services. The pre-study is likely to lead to a follow-up assignment involving the implementation of an MVP of the platform.",
+          "technologies": [
+            "Tor",
+            "onionSpray",
+            "onionBalancer",
+            "RFC",
+            "Security Analysis"
+          ]
+        },
+        {
+          "slug": "swedpee",
+          "name": "SwedPee AB",
+          "period": "2025-09",
+          "description": "I’ve taken over a React Native application called Manicken that manages a research study on urinary symptoms. It started as a short initial assignment focused on integrating push notifications and reminders from “Min Forskning,” which is an existing Layer 10 partnership centered around digital consent. The work applies to both the Google Play Store and the iOS App Store versions of the app. This is an Expo-based React Native project with a Google Cloud Functions and Firebase backend, which I’ve also worked with to implement and support this functionality.",
+          "technologies": [
+            "React Native",
+            "Expo",
+            "Firebase",
+            "Google Play Console",
+            "Google Cloud Platform",
+            "AppStore Connect"
+          ]
+        },
+        {
+          "slug": "frimurare",
+          "name": "Svenska Frimurare Orden",
+          "period": "2025-03 - 2025-03",
+          "description": "Svenska Frimurare Orden was looking to create their own booking system for parking and room accommodations in Stockholm, with the ability to both manage bookings administratively and allow users to handle their own reservations. I was responsible for producing the estimates for this application. In addition to that, Layer 10 saw an opportunity to explore the new tool lovable.dev, an AI-powered prompting platform for developing web applications, featuring an MCP connection to the PostgreSQL database provided by Supabase. The goal was to evaluate how far these kinds of AI tools have come, and how far we could get using a prompt-driven approach to application development.",
+          "technologies": [
+            "React",
+            "PostgreSQL",
+            "React Query",
+            "Vite",
+            "TypeScript",
+            "JSON Web Token"
+          ]
+        },
+        {
+          "slug": "gridit",
+          "name": "Gridit AB",
+          "period": "2025-02",
+          "description": "Gridit is developing a system for power grid balancing. I have developed an Expo (React Native) app that displays electricity production from solar panel installations. Based on backend documentation, I implemented flows for login/logout, token management, and data retrieval by day, month and year. Within the app you can follow the production, forecast and the part of market a specific device is planned to partake of. Data handling is built with @tanstack/react-query for efficient caching, and authentication is managed using React Context. For data visualization, VictoryChart is used. All code is written in TypeScript with typed models and custom data structures tailored for the frontend. I have also supported my colleagues at Gridit by creating a service that keeps another service alive, restarts it and can update it. Using technologies such as nssm, ps1 (pwrshell script) and nsi (for easy installation).",
+          "technologies": [
+            "Vite",
+            "TypeScript",
+            "React",
+            "React Native",
+            "React Context",
+            "React Query",
+            "Expo",
+            "Powershell"
+          ]
+        },
+        {
+          "slug": "mera",
+          "name": "Mera Förlag",
+          "period": "2025-02 - 2025-02",
+          "description": "Mera Förlag is looking to develop a system to streamline the publication of so-called 'Current Events Questions' ('Nutidsfrågor') for students. My responsibilities included producing estimates for the web application and setting up the technical environment. I also created initial design mockups in Figma.",
+          "technologies": [
+            "React",
+            "React Query",
+            "React Router",
+            "Vite",
+            "Node.js",
+            "nginx",
+            "Docker",
+            "TypeScript",
+            "AWS S3",
+            "MongoDB",
+            "Mongoose",
+            "JSON Web Token"
+          ]
+        },
+        {
+          "slug": "schackfyran",
+          "name": "Schackfyran",
+          "period": "2025-02 - 2025-02",
+          "description": "Schackfyran has a web application for QR scanning at chess tournaments, primarily used by referees. I was responsible for rebuilding the scanning functionality, as the previous solution struggled with complex QR codes. The solution involved implementing a new scanner component based on a code parser. In addition, visual bugs related to an outdated MUI component in Safari were fixed. These improvements are now live in production. In parallel, an Expo (React Native) version of the app has been developed, with customizations to packages and components enabling future deployment on both Android and iOS.",
+          "technologies": [
+            "Vite",
+            "TypeScript",
+            "React",
+            "React Native",
+            "React Router",
+            "React Context",
+            "Expo"
+          ]
+        },
+        {
+          "slug": "myoroface",
+          "name": "MYoroface",
+          "period": "2025-01 - 2025-01",
+          "description": "MYoroface had a bug where their BLE device would reset its internal RTC when the battery was replaced, requiring manual time configuration. I developed a solution where the RTC is read upon connection to the web application and automatically synchronized with Swedish local time, ensuring the clock always stays accurate.",
+          "technologies": [
+            "BLE",
+            "Bluetooth",
+            "JavaScript",
+            "React",
+            "Zustand (State Management)"
+          ]
+        }
+      ]
     },
     {
       "name": "Ericsson AB",
-      "role": "Lead Frontend Developer",
-      "period": "2023-11 - 2024-08"
-    },
-    {
-      "name": "Moogio AB",
-      "role": "Marketing & Sales Manager",
-      "period": "2022-01 - 2022-08"
-    },
-    {
-      "name": "Mölndal Energi AB",
-      "role": "Consultant / Sales Lead",
-      "period": "2015-08 - 2020-01"
+      "location": "Göteborg",
+      "projects": [
+        {
+          "slug": "ericsson-intern",
+          "name": "Lead Frontend Developer (Internship)",
+          "period": "2023-11 - 2024-08",
+          "description": "When I joined Ericsson, there was no lead frontend developer to guide or challenge me in the role I was immediately placed in. As a result, I had to step up and take on a leadership role for both myself and a colleague. I was fortunate, however, to have a mentor, Fredrik Kramén, who supported me with the larger technical decisions. The assignment at Ericsson was to modernize and build a new toolbox for the testers at Ericsson Microwave. As the project progressed, it grew beyond just the 'NIV' team. The tools we developed are now being used across all of Ericsson for testing purposes. One key reason for this wider adoption was that, during MVP development, we took the initiative to include test-benches outside of the NIV team since we were already pulling in relevant data from those sources. The entire project was built from scratch, which led us to choose Next.js for the frontend and Node.js as the primary backend technology.",
+          "technologies": [
+            "NEXT.js",
+            "TypeScript",
+            "HTML5",
+            "Tailwind CSS",
+            "SQL",
+            "Node.js",
+            "Websocket",
+            "Agile"
+          ]
+        }
+      ]
     }
   ]
 }
