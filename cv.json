@@ -1,0 +1,51 @@
+{
+  "projects": [
+    {
+      "name": "Nox",
+      "description": "Feasibility study for a therapeutic platform focusing on Tor-based anonymity.",
+      "technologies": ["Tor", "onionSpray", "onionBalancer"]
+    },
+    {
+      "name": "Swedpee AB (Manicken)",
+      "description": "React Native app for research on prostate issues, integrating push notifications.",
+      "technologies": ["React Native", "Firebase", "Expo", "TypeScript"]
+    },
+    {
+      "name": "Gridit AB",
+      "description": "Expo app for visualizing solar and wind power production data.",
+      "technologies": [
+        "React Native",
+        "TanStack Query",
+        "VictoryChart",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Ericsson NIV Tool",
+      "description": "Lead developer for a centralized system for executing and managing network tests.",
+      "technologies": ["Next.js", "Node.js", "TypeScript", "SQL"]
+    }
+  ],
+  "employers": [
+    {
+      "name": "Layer Ten Collective AB",
+      "role": "Software Developer",
+      "period": "2024-10 - Present"
+    },
+    {
+      "name": "Ericsson AB",
+      "role": "Lead Frontend Developer",
+      "period": "2023-11 - 2024-08"
+    },
+    {
+      "name": "Moogio AB",
+      "role": "Marketing & Sales Manager",
+      "period": "2022-01 - 2022-08"
+    },
+    {
+      "name": "Mölndal Energi AB",
+      "role": "Consultant / Sales Lead",
+      "period": "2015-08 - 2020-01"
+    }
+  ]
+}
