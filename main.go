@@ -13,6 +13,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+
 type doneMsg struct{}
 
 type Project struct {
@@ -65,92 +66,92 @@ func loadCV() CVData {
 	return data
 }
 
-func (m model) Init() tea.Cmd {
+func (model model) Init() tea.Cmd {
 	return tea.Batch(
-		m.spinner.Tick,
+		model.spinner.Tick,
 		tea.Tick(time.Second*2, func(t time.Time) tea.Msg {
 			return doneMsg{}
 		}),
 	)
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (model model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		m.width = msg.Width
-		m.height = msg.Height
+		model.width = msg.Width
+		model.height = msg.Height
 		headerHeight := 6 
 		footerHeight := 3
-		if !m.ready {
-			m.viewport = viewport.New(msg.Width-10, msg.Height-headerHeight-footerHeight)
-			m.ready = true
+		if !model.ready {
+			model.viewport = viewport.New(msg.Width-10, msg.Height-headerHeight-footerHeight)
+			model.ready = true
 		} else {
-			m.viewport.Width = msg.Width - 10
-			m.viewport.Height = msg.Height - headerHeight - footerHeight
+			model.viewport.Width = msg.Width - 10
+			model.viewport.Height = msg.Height - headerHeight - footerHeight
 		}
 
 	case doneMsg:
-		m.state = "menu"
+		model.state = "menu"
 
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "q":
-			return m, tea.Quit
+			return model, tea.Quit
 		case "a":
-			m.state = "about"
+			model.state = "about"
 		case "p":
-			m.state = "employer_select"
+			model.state = "employer_select"
 		case "s":
-			m.state = "skills"
+			model.state = "skills"
 		case "l": 
-			m.state = "cakeIsALie"
+			model.state = "cakeIsALie"
 		case "up":
-			if m.state == "employer_select" && m.selectedEmployerIdx > 0 {
-				m.selectedEmployerIdx--
-			} else if m.state == "projects" && m.selectedProjectIdx > 0 {
-				m.selectedProjectIdx--
+			if model.state == "employer_select" && model.selectedEmployerIdx > 0 {
+				model.selectedEmployerIdx--
+			} else if model.state == "projects" && model.selectedProjectIdx > 0 {
+				model.selectedProjectIdx--
 			} else {
 				var cmd tea.Cmd
-				m.viewport, cmd = m.viewport.Update(msg)
-				return m, cmd
+				model.viewport, cmd = model.viewport.Update(msg)
+				return model, cmd
 			}
 		case "down":
-			if m.state == "employer_select" && m.selectedEmployerIdx < len(m.cvData.Employers)-1 {
-				m.selectedEmployerIdx++
-			} else if m.state == "projects" && m.selectedProjectIdx < len(m.cvData.Employers[m.selectedEmployerIdx].Projects)-1 {
-				m.selectedProjectIdx++
+			if model.state == "employer_select" && model.selectedEmployerIdx < len(model.cvData.Employers)-1 {
+				model.selectedEmployerIdx++
+			} else if model.state == "projects" && model.selectedProjectIdx < len(model.cvData.Employers[model.selectedEmployerIdx].Projects)-1 {
+				model.selectedProjectIdx++
 			} else {
 				var cmd tea.Cmd
-				m.viewport, cmd = m.viewport.Update(msg)
-				return m, cmd
+				model.viewport, cmd = model.viewport.Update(msg)
+				return model, cmd
 			}
 		case "enter":
-			if m.state == "employer_select" {
-				m.state = "projects"
-				m.selectedProjectIdx = 0
-			} else if m.state == "projects" {
-				m.selectedProject = &m.cvData.Employers[m.selectedEmployerIdx].Projects[m.selectedProjectIdx]
-				m.state = "project_detail"
+			if model.state == "employer_select" {
+				model.state = "projects"
+				model.selectedProjectIdx = 0
+			} else if model.state == "projects" {
+				model.selectedProject = &model.cvData.Employers[model.selectedEmployerIdx].Projects[model.selectedProjectIdx]
+				model.state = "project_detail"
 			}
 		case "esc":
-			if m.state == "project_detail" {
-				m.state = "projects"
-			} else if m.state == "projects" {
-				m.state = "employer_select"
+			if model.state == "project_detail" {
+				model.state = "projects"
+			} else if model.state == "projects" {
+				model.state = "employer_select"
 			} else {
-				m.state = "menu"
+				model.state = "menu"
 			}
 		}
 
 	case spinner.TickMsg:
 		var cmd tea.Cmd
-		m.spinner, cmd = m.spinner.Update(msg)
+		model.spinner, cmd = model.spinner.Update(msg)
 		cmds = append(cmds, cmd)
 	}
 
-	return m, tea.Batch(cmds...)
+	return model, tea.Batch(cmds...)
 }
 
 var (
@@ -173,8 +174,8 @@ var (
     cakeStyle = lipgloss.NewStyle().Align(lipgloss.Center)
 )
 
-func (m model) View() string {
-	if !m.ready {
+func (model model) View() string {
+	if !model.ready {
 		return "Initializing..."
 	}
 
@@ -184,7 +185,7 @@ func (m model) View() string {
 	
 	const boxWidth = 70 
 
-	cakeStyle := lipgloss.NewStyle().Width(boxWidth).Align(lipgloss.Center)
+	cakeStyle = lipgloss.NewStyle().Width(boxWidth).Align(lipgloss.Center)
 	techStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FFFF")).Italic(true)
 	
 	loadingStyle := lipgloss.NewStyle().
@@ -194,10 +195,10 @@ func (m model) View() string {
         Align(lipgloss.Center)
 	
 	
-	switch m.state {
+	switch model.state {
 	case "loading":
 		headerText = "Oscar Wendt"
-		bodyContent = loadingStyle.Render(fmt.Sprintf("\n\n%s Loading Experience...", m.spinner.View()))
+		bodyContent = loadingStyle.Render(fmt.Sprintf("\n\n%s Loading Experience...", model.spinner.View()))
 	case "menu":
 		headerText = "Oscar Wendt"
 		menuText = "(a) About   (p) Projects   (s) Skills   (q) Quit"
@@ -217,25 +218,25 @@ func (m model) View() string {
 	case "employer_select":
 		headerText = "Select Employer"
 		menuText = "(↑/↓) Navigate   (enter) Select   (esc) Back"
-		for i, emp := range m.cvData.Employers {
+		for i, emp := range model.cvData.Employers {
 			cursor := "  "
-			if i == m.selectedEmployerIdx {
+			if i == model.selectedEmployerIdx {
 				cursor = "> "
 			}
 			bodyContent += fmt.Sprintf("%s%s\n", cursor, emp.Name)
 		}
 	case "projects":
-		headerText = m.cvData.Employers[m.selectedEmployerIdx].Name
+		headerText = model.cvData.Employers[model.selectedEmployerIdx].Name
 		menuText = "(↑/↓) Navigate   (enter) Select   (esc) Back"
-		for i, p := range m.cvData.Employers[m.selectedEmployerIdx].Projects {
+		for i, p := range model.cvData.Employers[model.selectedEmployerIdx].Projects {
 			cursor := "  "
-			if i == m.selectedProjectIdx {
+			if i == model.selectedProjectIdx {
 				cursor = "> "
 			}
 			bodyContent += fmt.Sprintf("%s%s\n", cursor, p.Name)
 		}
 	case "project_detail":
-		p := m.selectedProject
+		p := model.selectedProject
 		headerText = p.Name
 		menuText = "(↑/↓) Scroll   (esc) Back"
 		
@@ -250,7 +251,7 @@ func (m model) View() string {
 	
 	centeredBody := contentStyle.Width(boxWidth).Render(bodyContent) 
 	
-m.viewport.SetContent(contentStyle.Width(boxWidth).Render(bodyContent))
+model.viewport.SetContent(contentStyle.Width(boxWidth).Render(bodyContent))
 
 	header := headerStyle.Render(headerText)
 	menu := menuStyle.Render(menuText)
@@ -272,7 +273,7 @@ m.viewport.SetContent(contentStyle.Width(boxWidth).Render(bodyContent))
 		Padding(1, 2).
 		Render(uiBlock)
 
-	return lipgloss.Place(m.width, m.height, lipgloss.Center, lipgloss.Center, window)
+	return lipgloss.Place(model.width, model.height, lipgloss.Center, lipgloss.Center, window)
 }
 
 
