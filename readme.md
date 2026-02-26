@@ -18,6 +18,8 @@ go run main.go || go run .
 
 ```sh
 go build -o ssh-cv main.go
+for linux:
+
 ```
 
 This will create an executable named `ssh-cv` in the project directory.

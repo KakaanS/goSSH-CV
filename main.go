@@ -3,14 +3,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/charmbracelet/bubbles/spinner"
+	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/joho/godotenv"
 )
 
 
@@ -34,6 +38,7 @@ type CVData struct {
 }
 
 type model struct {
+	input      			textinput.Model
 	spinner             spinner.Model
 	viewport            viewport.Model
 	width               int
@@ -50,12 +55,18 @@ func initialModel() model {
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 
+	ti := textinput.New()
+    ti.Placeholder = "Enter your email..."
+    ti.CharLimit = 64
+    ti.Width = 30
+
 	return model{
 		spinner:             s,
 		state:               "loading",
 		cvData:              loadCV(),
 		selectedEmployerIdx: 0,
 		selectedProjectIdx:  0,
+		input:               ti,
 	}
 }
 
@@ -69,7 +80,7 @@ func loadCV() CVData {
 func (model model) Init() tea.Cmd {
 	return tea.Batch(
 		model.spinner.Tick,
-		tea.Tick(time.Second*2, func(t time.Time) tea.Msg {
+		tea.Tick(time.Second*1, func(t time.Time) tea.Msg {
 			return doneMsg{}
 		}),
 	)
@@ -78,7 +89,51 @@ func (model model) Init() tea.Cmd {
 func (model model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
+	if model.state == "contact" {
+		if kmsg, ok := msg.(tea.KeyMsg); ok {
+			switch kmsg.String() {
+			case "enter":
+			userEmail := model.input.Value() 
+            if userEmail != "" {
+                
+                
+                
+                go func(email string) {
+                    botToken := os.Getenv("botToken")
+                    chatID := os.Getenv("chatID")
+                    message := fmt.Sprintf("🚀 New CV Contact!\nEmail: %s\nSent via OpenClaw CLI", email)
+                    
+                    
+                     apiURL := fmt.Sprintf(                                                                 
+       				"https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s",                   
+       				botToken, chatID, url.QueryEscape(message))
+                    
+                
+                    _, _ = http.Get(apiURL) 
+                }(userEmail)
+                
+
+                model.input.SetValue("")
+                model.state = "sending"
+                return model, tea.Tick(time.Second*5, func(t time.Time) tea.Msg {
+                    return doneMsg{}
+                })
+            }
+			case "esc":
+				model.state = "menu"
+				model.input.Blur()
+				return model, nil
+			default:
+				// Only update input, do not handle global shortcuts
+			}
+		}
+		var cmd tea.Cmd
+		model.input, cmd = model.input.Update(msg)
+		return model, cmd
+	}
+
 	switch msg := msg.(type) {
+		
 	case tea.WindowSizeMsg:
 		model.width = msg.Width
 		model.height = msg.Height
@@ -91,23 +146,38 @@ func (model model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			model.viewport.Width = msg.Width - 10
 			model.viewport.Height = msg.Height - headerHeight - footerHeight
 		}
+	
+	
 
 	case doneMsg:
-		model.state = "menu"
+        model.state = "menu"
 
-	case tea.KeyMsg:
-		switch msg.String() {
-		case "q":
-			return model, tea.Quit
-		case "a":
+    case spinner.TickMsg:
+        var cmd tea.Cmd
+        model.spinner, cmd = model.spinner.Update(msg)
+        return model, cmd
+
+    case tea.KeyMsg:
+       
+		
+        switch msg.String() {
+		case "a": 
 			model.state = "about"
+
 		case "p":
 			model.state = "employer_select"
+			model.selectedEmployerIdx = 0
+			model.selectedProjectIdx = 0
+
 		case "s":
 			model.state = "skills"
-		case "l": 
-			model.state = "cakeIsALie"
-		case "up":
+        case "q":
+            return model, tea.Quit
+        case "c":
+            model.state = "contact"
+            return model, model.input.Focus()
+    
+		case "up", "k":
 			if model.state == "employer_select" && model.selectedEmployerIdx > 0 {
 				model.selectedEmployerIdx--
 			} else if model.state == "projects" && model.selectedProjectIdx > 0 {
@@ -117,7 +187,7 @@ func (model model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				model.viewport, cmd = model.viewport.Update(msg)
 				return model, cmd
 			}
-		case "down":
+		case "down", "j":
 			if model.state == "employer_select" && model.selectedEmployerIdx < len(model.cvData.Employers)-1 {
 				model.selectedEmployerIdx++
 			} else if model.state == "projects" && model.selectedProjectIdx < len(model.cvData.Employers[model.selectedEmployerIdx].Projects)-1 {
@@ -145,10 +215,7 @@ func (model model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 		}
 
-	case spinner.TickMsg:
-		var cmd tea.Cmd
-		model.spinner, cmd = model.spinner.Update(msg)
-		cmds = append(cmds, cmd)
+
 	}
 
 	return model, tea.Batch(cmds...)
@@ -180,10 +247,9 @@ func (model model) View() string {
 	}
 
 	var headerText, menuText, bodyContent string
-
 	
 	
-	const boxWidth = 70 
+	const boxWidth = 70
 
 	cakeStyle = lipgloss.NewStyle().Width(boxWidth).Align(lipgloss.Center)
 	techStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FFFF")).Italic(true)
@@ -201,7 +267,7 @@ func (model model) View() string {
 		bodyContent = loadingStyle.Render(fmt.Sprintf("\n\n%s Loading Experience...", model.spinner.View()))
 	case "menu":
 		headerText = "Oscar Wendt"
-		menuText = "(a) About   (p) Projects   (s) Skills   (q) Quit"
+		menuText = "(a) About   (p) Projects   (s) Skills   (c) Contact   (q) Quit"
 		bodyContent = cakeStyle.Render(cakeArt)
 	case "cakeIsALie": 
 		headerText = "The Cake is a lie"
@@ -209,8 +275,18 @@ func (model model) View() string {
 	case "about":
 		headerText = "About"
 		menuText = "(esc) Back"
-		bodyContent =  "Oscar joined Layer 10 with excellent references from Ericsson AB/Microwave, where he, over the course of nearly a year, was solely responsible for the modernization and redevelopment of a new, centralized system for test management and execution.  His time at Ericsson, which unfortunately came to an end due to downsizing in 2024, was preceded by studies in web development and security. During his studies, Oscar stood out as one of the few students who, despite limited prior experience, made significant progress particularly within the frontend domain. His genuine passion for programming, combined with experience from other industries such as service and sales, likely contributed to his steep learning curve. Oscar also has experience running his own business.  In summary: Oscar is a web developer with a strong focus on modern frontend technologies. While his CV may not yet reflect many years in the field, he has shown remarkable potential for rapid growth toward a more senior role."
-
+		bodyContent =  "Oscar joined Layer 10 with excellent references from Ericsson AB/Microwave, where he, over the course of nearly a year, was solely responsible for the modernization and redevelopment of a new, centralized system for test management and execution. \nHis time at Ericsson, which unfortunately came to an end due to downsizing in 2024, was preceded by studies in web development and security. During his studies, Oscar stood out as one of the few students who, despite limited prior experience, made significant progress particularly within the frontend domain. His genuine passion for programming, combined with experience from other industries such as service and sales, likely contributed to his steep learning curve. Oscar also has experience running his own business.  \n\nIn summary: Oscar is a web developer with a strong focus on modern frontend technologies. While his CV may not yet reflect many years in the field, he has shown remarkable potential for rapid growth toward a more senior role."
+	case "contact":
+    	headerText = "Contact"
+    	menuText = "(enter) Send   (esc) Back"
+    	bodyContent = "\nReach out to me:\n\n" + model.input.View()
+	case "sending":
+	    headerText = "OpenClaw Assistant"
+    	menuText = "Processing..."
+    	bodyContent = lipgloss.NewStyle().
+        Foreground(lipgloss.Color("#78e5a9")).
+        Render("\n\nOpenClaw is now connecting us via email.\nOne moment please...")
+		
 	case "skills":
 		headerText = "Skills"
 		menuText = "(esc) Back"
@@ -279,6 +355,7 @@ model.viewport.SetContent(contentStyle.Width(boxWidth).Render(bodyContent))
 
 
 func main() {
+	_ = godotenv.Load()
 	p := tea.NewProgram(initialModel(), tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Error: %v", err)
