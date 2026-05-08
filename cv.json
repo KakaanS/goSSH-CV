@@ -1,14 +1,87 @@
 {
+  "contact": {
+    "name": "Oscar Wendt",
+    "role": "Frontend Developer",
+    "phone": "0768959801",
+    "email": "oscar.wendt@layer10.se"
+  },
+  "skills": [
+    "React",
+    "React Native",
+    "React Router",
+    "React Query",
+    "React Context",
+    "Redux",
+    "Zustand (State Management)",
+    "NEXT.js",
+    "Server-Side Rendering",
+    "TypeScript",
+    "JavaScript",
+    "Node.js",
+    "Expo",
+    "Vite",
+    "Webpack",
+    "Tailwind CSS",
+    "Styled Components",
+    "CSS",
+    "HTML",
+    "HTML5",
+    "jQuery",
+    "REST",
+    "Websocket",
+    "JSON",
+    "JSON Web Token",
+    "SQL",
+    "MySQL",
+    "PostgreSQL",
+    "MongoDB",
+    "Mongoose",
+    "Firebase",
+    "Google Cloud Platform",
+    "AWS S3",
+    "Docker",
+    "nginx",
+    "Powershell",
+    "GIT",
+    "Github Copilot",
+    "AI Dev Tools",
+    "BLE",
+    "Bluetooth",
+    "AppStore Connect",
+    "TestFlight",
+    "Google Play Console",
+    "OWASP Top 10",
+    "Kanban",
+    "Agile Work Process"
+  ],
   "employers": [
     {
       "name": "Layer Ten Collective AB",
       "location": "Göteborg",
+      "type": "tech",
+      "period": "2024-10 - ongoing",
       "projects": [
+        {
+          "slug": "samact",
+          "name": "Samact AB",
+          "period": "2026-03 - ongoing",
+          "description": "Fullstack engineer, Gothenburg.\n\nA full-stack TypeScript application for coordinating professionals working with at-risk children and families across multiple agencies (social services, schools, healthcare). The platform centralises case data, real-time messaging, structured action plans with sub-goals, append-only case journals, and status tracking, replacing ad-hoc email and phone coordination between coordinators, team members, guardians, and children.\n\nArchitected as a monorepo with four packages: a Bun backend, a Vite + React web frontend, an Expo / React Native mobile app, and a shared package for cross-package types and Zod validation contracts. Authentication flows through Keycloak with BankID for the Swedish digital-ID login path; tokens are stored in expo-secure-store on mobile.\n\nThe backend uses Bun's native primitives (Bun.serve, Bun.sql for PostgreSQL, built-in WebSocket) instead of the usual Express/pg/ws stack. Real-time features — message delivery, unread counts, conversation list updates — flow through a single WebSocket channel as the source of truth, with no HTTP fallback. Case access is enforced server-side via assignment-scoped membership checks.\n\nThe mobile app is built with Expo Router, NativeWind (Tailwind for RN), Reanimated + Worklets for gesture-driven tab transitions, and TanStack Query for server state. The web frontend uses React Query, react-hook-form, and a shadcn-style component layer.\n\nEngineering setup includes strict TypeScript ESlint, Vitest for unit tests, Prettier formatting, and Docker Compose for local infra (Postgres, Keycloak, pgAdmin, plus an nginx-fronted production stack).",
+          "technologies": [
+            "React",
+            "React Native",
+            "Expo",
+            "Tailwind CSS",
+            "Docker",
+            "AppStore Connect",
+            "Google Play Console",
+            "AI Dev Tools"
+          ]
+        },
         {
           "slug": "nox",
           "name": "Nox - Prestudy",
           "period": "2025-12 - 2026-01",
-          "description": "As part of a cross-functional engineering team, I participated in a pre-study aimed at evaluating how a therapeutic platform could be designed to allow users to choose between identified and anonymous usage, without compromising functionality, user experience, or professional standards. The work focused on architectural and security challenges related to anonymous access over Tor, including constraints in client environments where JavaScript may be partially or fully disabled. I participated in workshops and took responsibility for evaluating strategies to expose the platform on the Tor network via .onion addresses.\n\n· Conducted a technical pre-study of Tor integration strategies for web applications, comparing proxy-based exposure (onionSpray) with Tor-native onion services coordinated by onionBalancer.\n\n· Designed Tor-native service architectures with a focus on anonymity, availability, and operational trade-offs, including key management, service identity, and redundancy.\n\n· Authored internal RFC documents describing scope, threat models, security considerations, and architectural decisions for Tor-based deployments.\n\n· Analyzed anonymity guarantees, traffic correlation risks, logging practices, and user trust implications for Tor-accessible services. The pre-study is likely to lead to a follow-up assignment involving the implementation of an MVP of the platform.",
+          "description": "Systemdeveloper, Gothenburg.\n\nAs part of a cross-functional engineering team, I participated in a pre-study aimed at evaluating how a therapeutic platform could be designed to allow users to choose between identified and anonymous usage, without compromising functionality, user experience, or professional standards. The work focused on architectural and security challenges related to anonymous access over Tor, including constraints in client environments where JavaScript may be partially or fully disabled. I participated in workshops and took responsibility for evaluating strategies to expose the platform on the Tor network via .onion addresses.\n\n· Conducted a technical pre-study of Tor integration strategies for web applications, comparing proxy-based exposure (onionSpray) with Tor-native onion services coordinated by onionBalancer.\n\n· Designed Tor-native service architectures with a focus on anonymity, availability, and operational trade-offs, including key management, service identity, and redundancy.\n\n· Authored internal RFC documents describing scope, threat models, security considerations, and architectural decisions for Tor-based deployments.\n\n· Analyzed anonymity guarantees, traffic correlation risks, logging practices, and user trust implications for Tor-accessible services.\n\nThe pre-study is likely to lead to a follow-up assignment involving the implementation of an MVP of the platform.",
           "technologies": [
             "Tor",
             "onionSpray",
@@ -20,8 +93,8 @@
         {
           "slug": "swedpee",
           "name": "SwedPee AB",
-          "period": "2025-09 - ongoing",
-          "description": "I’ve taken over a React Native application called Manicken that manages a research study on urinary symptoms. It started as a short initial assignment focused on integrating push notifications and reminders from “Min Forskning,” which is an existing Layer 10 partnership centered around digital consent. The work applies to both the Google Play Store and the iOS App Store versions of the app. This is an Expo-based React Native project with a Google Cloud Functions and Firebase backend, which I’ve also worked with to implement and support this functionality.",
+          "period": "2025-09 - 2026-02",
+          "description": "Fullstack developer, Gothenburg.\n\nI've taken over a React Native application called Manicken that manages a research study on urinary symptoms. It started as a short initial assignment focused on integrating push notifications and reminders from 'Min Forskning,' which is an existing Layer 10 partnership centered around digital consent. The work applies to both the Google Play Store and the iOS App Store versions of the app.\n\nThis is an Expo-based React Native project with a Google Cloud Functions and Firebase backend, which I've also worked with to implement and support this functionality.",
           "technologies": [
             "React Native",
             "Expo",
@@ -35,7 +108,7 @@
           "slug": "frimurare",
           "name": "Svenska Frimurare Orden",
           "period": "2025-03 - 2025-03",
-          "description": "Svenska Frimurare Orden was looking to create their own booking system for parking and room accommodations in Stockholm, with the ability to both manage bookings administratively and allow users to handle their own reservations. I was responsible for producing the estimates for this application. In addition to that, Layer 10 saw an opportunity to explore the new tool lovable.dev, an AI-powered prompting platform for developing web applications, featuring an MCP connection to the PostgreSQL database provided by Supabase. The goal was to evaluate how far these kinds of AI tools have come, and how far we could get using a prompt-driven approach to application development.",
+          "description": "Frontend Developer, Göteborg.\n\nSvenska Frimurare Orden was looking to create their own booking system for parking and room accommodations in Stockholm, with the ability to both manage bookings administratively and allow users to handle their own reservations.\n\nI was responsible for producing the estimates for this application. In addition to that, Layer 10 saw an opportunity to explore the new tool lovable.dev, an AI-powered prompting platform for developing web applications, featuring an MCP connection to the PostgreSQL database provided by Supabase. The goal was to evaluate how far these kinds of AI tools have come, and how far we could get using a prompt-driven approach to application development.",
           "technologies": [
             "React",
             "PostgreSQL",
@@ -49,7 +122,7 @@
           "slug": "gridit",
           "name": "Gridit AB",
           "period": "2025-02 - ongoing",
-          "description": "Gridit is developing a system for power grid balancing. I have developed an Expo (React Native) app that displays electricity production from solar panel installations. Based on backend documentation, I implemented flows for login/logout, token management, and data retrieval by day, month and year. Within the app you can follow the production, forecast and the part of market a specific device is planned to partake of. Data handling is built with @tanstack/react-query for efficient caching, and authentication is managed using React Context. For data visualization, VictoryChart is used. All code is written in TypeScript with typed models and custom data structures tailored for the frontend. I have also supported my colleagues at Gridit by creating a service that keeps another service alive, restarts it and can update it. Using technologies such as nssm, ps1 (pwrshell script) and nsi (for easy installation).",
+          "description": "Frontend Developer, Göteborg.\n\nGridit is developing a system for power grid balancing. I have developed an Expo (React Native) app that displays electricity production from solar panel installations. Based on backend documentation, I implemented flows for login/logout, token management, and data retrieval by day, month and year. Within the app you can follow the production, forecast and the part of market a specific device is planned to partake of.\n\nData handling is built with @tanstack/react-query for efficient caching, and authentication is managed using React Context. For data visualization, VictoryChart is used. All code is written in TypeScript with typed models and custom data structures tailored for the frontend.\n\nI have also supported my colleagues at Gridit by creating a service that keeps another service alive, restarts it and can update it. Using technologies such as nssm, ps1 (pwrshell script) and nsi (for easy installation).",
           "technologies": [
             "Vite",
             "TypeScript",
@@ -65,7 +138,7 @@
           "slug": "mera",
           "name": "Mera Förlag",
           "period": "2025-02 - 2025-02",
-          "description": "Mera Förlag is looking to develop a system to streamline the publication of so-called 'Current Events Questions' ('Nutidsfrågor') for students. My responsibilities included producing estimates for the web application and setting up the technical environment. I also created initial design mockups in Figma.",
+          "description": "Frontend Developer, Göteborg.\n\nMera Förlag is looking to develop a system to streamline the publication of so-called 'Current Events Questions' ('Nutidsfrågor') for students. My responsibilities included producing estimates for the web application and setting up the technical environment. I also created initial design mockups in Figma.",
           "technologies": [
             "React",
             "React Query",
@@ -85,7 +158,7 @@
           "slug": "schackfyran",
           "name": "Schackfyran",
           "period": "2025-02 - 2025-02",
-          "description": "Schackfyran has a web application for QR scanning at chess tournaments, primarily used by referees. I was responsible for rebuilding the scanning functionality, as the previous solution struggled with complex QR codes. The solution involved implementing a new scanner component based on a code parser. In addition, visual bugs related to an outdated MUI component in Safari were fixed. These improvements are now live in production. In parallel, an Expo (React Native) version of the app has been developed, with customizations to packages and components enabling future deployment on both Android and iOS.",
+          "description": "Frontend Developer, Göteborg.\n\nSchackfyran has a web application for QR scanning at chess tournaments, primarily used by referees. I was responsible for rebuilding the scanning functionality, as the previous solution struggled with complex QR codes. The solution involved implementing a new scanner component based on a code parser.\n\nIn addition, visual bugs related to an outdated MUI component in Safari were fixed. These improvements are now live in production. In parallel, an Expo (React Native) version of the app has been developed, with customizations to packages and components enabling future deployment on both Android and iOS.",
           "technologies": [
             "Vite",
             "TypeScript",
@@ -100,7 +173,7 @@
           "slug": "myoroface",
           "name": "MYoroface",
           "period": "2025-01 - 2025-01",
-          "description": "MYoroface had a bug where their BLE device would reset its internal RTC when the battery was replaced, requiring manual time configuration. I developed a solution where the RTC is read upon connection to the web application and automatically synchronized with Swedish local time, ensuring the clock always stays accurate.",
+          "description": "Frontend Developer, Göteborg.\n\nMYoroface had a bug where their BLE device would reset its internal RTC when the battery was replaced, requiring manual time configuration. I developed a solution where the RTC is read upon connection to the web application and automatically synchronized with Swedish local time, ensuring the clock always stays accurate.",
           "technologies": [
             "BLE",
             "Bluetooth",
@@ -114,12 +187,14 @@
     {
       "name": "Ericsson AB",
       "location": "Göteborg",
+      "type": "tech",
+      "period": "2023-11 - 2024-08",
       "projects": [
         {
           "slug": "ericsson-intern",
           "name": "Lead Frontend Developer (Internship)",
           "period": "2023-11 - 2024-08",
-          "description": "When I joined Ericsson, there was no lead frontend developer to guide or challenge me in the role I was immediately placed in. As a result, I had to step up and take on a leadership role for both myself and a colleague. I was fortunate, however, to have a mentor, Fredrik Kramén, who supported me with the larger technical decisions. The assignment at Ericsson was to modernize and build a new toolbox for the testers at Ericsson Microwave. As the project progressed, it grew beyond just the 'NIV' team. The tools we developed are now being used across all of Ericsson for testing purposes. One key reason for this wider adoption was that, during MVP development, we took the initiative to include test-benches outside of the NIV team since we were already pulling in relevant data from those sources. The entire project was built from scratch, which led us to choose Next.js for the frontend and Node.js as the primary backend technology.",
+          "description": "When I joined Ericsson, there was no lead frontend developer to guide or challenge me in the role I was immediately placed in. As a result, I had to step up and take on a leadership role for both myself and a colleague. I was fortunate, however, to have a mentor, Fredrik Kramén, who supported me with the larger technical decisions.\n\nThe assignment at Ericsson was to modernize and build a new toolbox for the testers at Ericsson Microwave. As the project progressed, it grew beyond just the 'NIV' team. The tools we developed are now being used across all of Ericsson for testing purposes.\n\nOne key reason for this wider adoption was that, during MVP development, we took the initiative to include test-benches outside of the NIV team since we were already pulling in relevant data from those sources. The entire project was built from scratch, which led us to choose Next.js for the frontend and Node.js as the primary backend technology.",
           "technologies": [
             "NEXT.js",
             "TypeScript",
@@ -128,10 +203,82 @@
             "SQL",
             "Node.js",
             "Websocket",
-            "Agile"
+            "Agile Work Process"
           ]
         }
       ]
+    },
+    {
+      "name": "Moogio AB",
+      "location": "Mölndal",
+      "type": "non-tech",
+      "period": "2022-01 - 2022-08",
+      "role": "Sales / Marketing",
+      "description": "Responsible for marketing, sales, and communication towards private customers as well as companies, initially in Kungsbacka municipality but quickly expanding to include Falkenberg Municipality."
+    },
+    {
+      "name": "PG's Markis & Persienner AB",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2021-02 - 2022-01",
+      "role": "Sales Representative (B2B)",
+      "description": "Sales representative and responsible for the development of B2B sales."
+    },
+    {
+      "name": "Keycode AB",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2020-04 - 2021-02",
+      "role": "Telephone Sales",
+      "description": "I took a job during COVID as a telephone salesperson for a company called Keycode. I refer to this as my 'covid-crashlanding project'."
+    },
+    {
+      "name": "Parakey AB",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2020-01 - 2020-04",
+      "role": "Sales",
+      "description": "The first salesperson hired by this proptech company after the sales manager. Unfortunately, a small pandemic hit, leading to tightening measures and the end of my probationary period."
+    },
+    {
+      "name": "Mölndal Energi AB",
+      "location": "Mölndal",
+      "type": "non-tech",
+      "period": "2015-08 - 2020-01",
+      "role": "Sales Consultant / Department Lead",
+      "description": "Started my own company and worked as a consultant for Mölndal Energi, initially in a sales capacity, which went very well. I was asked to build a private sales department for them. Planning and inventory of programs and resources, hiring and managing staff, as well as training new personnel, were all within my responsibilities."
+    },
+    {
+      "name": "JOOL Capital Partner AB",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2014-01 - 2015-08",
+      "role": "Capital Acquisition",
+      "description": "Capital acquisition for bonds and bridge loans managed by JOOL Capital Partner AB and brought into the First North market."
+    },
+    {
+      "name": "Proffscall AB",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2013-01 - 2014-01",
+      "role": "Account Manager",
+      "description": "Account manager for Tele2 small-medium sized businesses."
+    },
+    {
+      "name": "Mölndal Energi AB",
+      "location": "Mölndal",
+      "type": "non-tech",
+      "period": "2010-01 - 2013-01",
+      "role": "Sales / Customer Service",
+      "description": "First salesperson, then recruited as a full-time employee in customer service at Mölndal Energi."
+    },
+    {
+      "name": "HB Klyftan",
+      "location": "Göteborg",
+      "type": "non-tech",
+      "period": "2006-01 - 2010-01",
+      "role": "Weekend / Summer Job",
+      "description": "Weekend and summer job during high school. Did everything from cleaning the refrigeration room to filleting fish."
     }
   ]
 }
